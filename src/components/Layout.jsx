@@ -10,28 +10,17 @@ const Container = styled.div`
 
   display: flex;
   justify-content: space-evenly;
+
+  background-color: black;
 `;
 
 const LogoContainer = styled.div`
-  max-width: 34rem;
+  max-width: 15rem;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  .logo__header {
-    position: relative;
-    width: 75%;
-
-    padding: 0;
-    margin: 1.5rem 0 0 0;
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
 
   .logo__description {
     position: relative;
@@ -41,7 +30,6 @@ const LogoContainer = styled.div`
 
     color: #bfbfbf;
     text-align: center;
-    font-family: sans-serif;
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -51,6 +39,11 @@ const LogoContainer = styled.div`
 
 const Logo = styled.div`
   position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -59,8 +52,6 @@ const ContentContainer = styled.div`
   height: 100%;
 
   overflow-y: auto;
-
-  background-color: #ff6d2e;
 `;
 
 function Layout() {
@@ -70,11 +61,10 @@ function Layout() {
     <Container>
       {!isMobile && (
         <LogoContainer>
-          <Logo></Logo>
-          <div className="logo__header">
-            {/*<img src={`${process.env.PUBLIC_URL}/images/~~.png`} />*/}
-          </div>
-          <h3 className="logo__description">니어씨</h3>
+          <Logo>
+            <img src={`${process.env.PUBLIC_URL}/images/logo.png`} />
+          </Logo>
+          {/* <h3 className="logo__description">니어씨</h3>*/}
         </LogoContainer>
       )}
       <ContentContainer>
