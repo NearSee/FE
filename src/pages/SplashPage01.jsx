@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   position: relative;
@@ -74,7 +75,16 @@ const ButtonContainer = styled.div`
   margin-top: 3.4rem;
   justify-content: center;
 `;
-const Button = styled.div`
+const Button01 = styled.div`
+  width: 1.3rem;
+  height: 0.7rem;
+  flex-shrink: 0;
+
+  margin-left: 0.5rem;
+  border-radius: 0.9rem;
+  background: #fff;
+`;
+const Button02 = styled.div`
   width: 0.7rem;
   height: 0.7rem;
   margin-left: 0.5rem;
@@ -84,7 +94,20 @@ const Button = styled.div`
   background: #fff;
 `;
 
-const SplashPage = () => {
+const ImgBox = styled.div`
+  text-align: center;
+  padding-top: 5rem;
+  margin-top: 2.3rem;
+  width: 100%;
+  height: 10rem;
+`;
+
+const SplashPage01 = () => {
+  const navigate = useNavigate();
+  const GoSplash02 = () => {
+    navigate("/splash02");
+  };
+
   return (
     <Background>
       <RoundBox>
@@ -115,14 +138,16 @@ const SplashPage = () => {
             <br /> 모든 니어씨 답변자에게 전송돼요!
           </About>
           <ButtonContainer>
-            <Button />
-            <Button />
+            <Button01 />
+            <Button02 onClick={GoSplash02} />
           </ButtonContainer>
         </div>
       </RoundBox>
-
-      <img src="./images/smil_face.png" width="160rem" />
+      <ImgBox>
+        <img src="./images/splash_question.png" width="40rem" />
+        <img src="./images/smil_face.png" width="160rem" />
+      </ImgBox>
     </Background>
   );
 };
-export default SplashPage;
+export default SplashPage01;
