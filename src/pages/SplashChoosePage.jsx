@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import Modal from "../components/splash/Modal";
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/Layout";
+import { useState } from "react";
+import Top from "../components/splash/Top";
 
 const Background = styled.div`
   position: relative;
@@ -16,10 +18,6 @@ const Div = styled.div`
   height: 100%;
   width: 100%;
   text-align: center;
-`;
-const Top = styled.div`
-  display: flex;
-  height: 3rem;
 `;
 const Explain01 = styled.div`
   width: 100%;
@@ -40,13 +38,12 @@ const Explain01 = styled.div`
   }
 `;
 const ChoosContainer = styled.div`
+  padding-left: 3rem;
   display: flex;
-  height: 11.6rem;
-  gap: 1.6rem;
+  height: 11.8rem;
+  gap: 2rem;
 
   margin-top: 1rem;
-  text-align: center;
-  justify-content: center;
 `;
 
 const Explain02 = styled.div`
@@ -79,46 +76,58 @@ const ChooseBtn = styled.button`
   letter-spacing: -0.8px;
 
   margin-top: 4.5rem;
-  background: #ff6d2e;
+  background: ${(props) =>
+    props.select ? "#FF6D2E" : "rgba(89, 89, 89, 0.44)"};
 `;
 
 const SplashChoosePage = () => {
-  const navigate = useNavigate();
-  const GoBack = () => {
-    navigate("/splash02");
+  const [select, setSelect] = useState(0);
+  const [value, setValue] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const IsOpen = () => {
+    setIsOpen(true);
   };
+
+  const SelectQ = () => {
+    setSelect(1);
+    setValue("질문자");
+  };
+  const SelectA = () => {
+    setSelect(1);
+    setValue("답변자");
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Background>
       <Div>
-        <Top>
-          <img
-            src="./images/go_back.png"
-            alt="그 전으로"
-            style={{
-              marginLeft: "0.2rem",
-              marginTop: "0.8rem",
-              width: "2.3rem",
-              height: "2.3rem",
-            }}
-            onClick={GoBack}
-          />
-          <img
-            src="./images/small_logo2.png"
-            alt="니어씨"
-            style={{
-              width: "2.1rem",
-              height: "1.4rem",
-              marginLeft: "8.7rem",
-              marginTop: "0.7rem",
-            }}
-          />
-        </Top>
+        <Top />
         <Explain01>
           어떤 것을 <span>선택</span>하시나요?
         </Explain01>
         <ChoosContainer>
-          <img src="./images/buttonQ.png" alt="질문자 선택 버튼" />
-          <img src="./images/buttonA.png" alt="답변자 선택 버튼" />
+          <img
+            onClick={SelectQ}
+            src={
+              value === "답변자"
+                ? "./images/gray_buttonQ.png"
+                : "./images/buttonQ.png"
+            }
+            alt="질문자 선택 버튼"
+          />
+          <img
+            onClick={SelectA}
+            src={
+              value === "질문자"
+                ? "./images/gray_buttonA.png"
+                : "./images/buttonA.png"
+            }
+            alt="답변자 선택 버튼"
+          />
         </ChoosContainer>
 
         <Explain02>
@@ -128,8 +137,11 @@ const SplashChoosePage = () => {
           <br />
           신중히 선택해주세요.
         </Explain02>
-        <ChooseBtn>선택 완료</ChooseBtn>
+        <ChooseBtn onClick={IsOpen} select={select}>
+          선택 완료
+        </ChooseBtn>
       </Div>
+      {isOpen && <Modal isOpen={isOpen} onClose={closeModal} value={value} />}
     </Background>
   );
 };
