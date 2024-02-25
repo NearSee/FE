@@ -5,6 +5,9 @@ import Layout from "./components/Layout";
 
 import LoginPage from "./pages/LoginPage";
 import CallbackPage from "./pages/CallbackPage";
+import SplashPage01 from "./pages/SplashPage01";
+import SplashPage02 from "./pages/SplashPage02";
+import SplashChoose from "./pages/SplashChoosePage";
 
 function App() {
   return (
@@ -13,6 +16,9 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<LoginPage />} />
           <Route path="callback" element={<CallbackPage />} />
+          <Route path="splash01" element={<SplashPage01 />} />
+          <Route path="splash02" element={<SplashPage02 />} />
+          <Route path="splash_choose" element={<SplashChoose />} />
         </Route>
       </Routes>
     </Router>
