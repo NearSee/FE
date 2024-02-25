@@ -25,7 +25,7 @@ const Button02 = styled.div`
 
   border: none;
   border-radius: 0.7rem;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.5);
 `;
 
 const Button2 = () => {
