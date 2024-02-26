@@ -49,7 +49,7 @@ const SplashPage01 = () => {
       <Splash
         value={aboutText}
         qualify="질문자"
-        onClick={GoSplash02}
+        goRight={GoSplash02}
         {...handlers}
       ></Splash>
       <Button1 />

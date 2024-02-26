@@ -12,6 +12,19 @@ const RoundBox = styled.div`
   background: ${(props) => props.background || "#ff8d5d"};
 `;
 
+const Right = styled.div`
+  position: absolute;
+  right: -1rem;
+  width: 7rem;
+  height: 40rem;
+`;
+const Left = styled.div`
+  position: absolute;
+  left: -1rem;
+  width: 7rem;
+  height: 40rem;
+`;
+
 const Logo = styled.div`
   height: 1.5rem;
   width: 100%;
@@ -61,7 +74,7 @@ const About = styled.div`
 export default function Splash(props) {
   return (
     <>
-      <RoundBox onClick={props.onClick} background={props.background}>
+      <RoundBox background={props.background}>
         <div
           style={{
             position: "absolute",
@@ -75,6 +88,8 @@ export default function Splash(props) {
           <Logo>
             <img src="../images/small_logo.png" alt="니어씨" width="9.6%" />
           </Logo>
+          <Left onClick={props.goLeft} />
+          <Right onClick={props.goRight} />
           <Qualify>
             <SmaillCircle background={props.smallColor} />
             {props.qualify}
