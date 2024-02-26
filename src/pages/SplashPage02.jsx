@@ -25,6 +25,9 @@ const SplashPage02 = () => {
   const GoSplash01 = () => {
     navigate("/splash01");
   };
+  const GoChoose = () => {
+    navigate("/splash_choose");
+  };
 
   //   const handleSwipe = () => {
   //     navigate("/splash02");
@@ -52,7 +55,8 @@ const SplashPage02 = () => {
       <Splash
         value={aboutText}
         qualify="답변자"
-        onClick={GoSplash01}
+        goLeft={GoSplash01}
+        goRight={GoChoose}
         background="#FFC700"
         smallColor="#FF8D5D"
       ></Splash>
