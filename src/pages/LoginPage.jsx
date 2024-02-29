@@ -51,13 +51,13 @@ const ButtonRow = styled.div`
 `;
 
 function LoginPage() {
-  // const KAKAO_REST_API_KEY =  // 후에 환경변수 설정 예정
-  // const REDIRECT_URI = // 후에 환경변수 설정 예정
-  // const KAKAO_AUTH_URL =
+  const KAKAO_REST_API_KEY = "4c4574df49704584df5273b4c947b12e";
+  const REDIRECT_URI = "http://localhost:3000/callback";
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
 
-  // const handleKakaoLogin = () => {
-  //   window.location.href = KAKAO_AUTH_URL;
-  // };
+  const handleKakaoLogin = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
 
   const [showButtonRow, setShowButtonRow] = useState(false);
   const [logoMarginTop, setLogoMarginTop] = useState("15rem");
@@ -74,7 +74,7 @@ function LoginPage() {
     <Background logoMarginTop={logoMarginTop}>
       <img className="logo" src={`${process.env.PUBLIC_URL}/images/logo.png`} />
 
-      <ButtonRow visible={showButtonRow} /*onClick={handleKakaoLogin}*/>
+      <ButtonRow visible={showButtonRow} onClick={handleKakaoLogin}>
         <span className="description">니어씨에 가입하시려면</span>
         <img src={`${process.env.PUBLIC_URL}/images/kakao_btn.png`} />
       </ButtonRow>
