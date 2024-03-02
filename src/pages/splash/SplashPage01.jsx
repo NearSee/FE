@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Splash from "../components/splash/Splash";
-import Button1 from "../components/splash/Button1";
+import Splash from "../../components/splash/Splash";
+import Button1 from "../../components/splash/Button1";
 import { useNavigate } from "react-router-dom";
-import { useSwipeable } from "react-swipeable";
+// import { useSwipeable } from "react-swipeable";
 
 const Background = styled.div`
   position: relative;
@@ -40,9 +40,9 @@ const SplashPage01 = () => {
     navigate("/splash02");
   };
 
-  const handlers = useSwipeable({
-    onSwipedRight: GoSplash02, // 오른쪽으로 스와이프할 때 GoSplash02 함수 실행
-  });
+  // const handlers = useSwipeable({
+  //   onSwipedRight: GoSplash02, // 오른쪽으로 스와이프할 때 GoSplash02 함수 실행
+  // });
 
   return (
     <Background>
@@ -50,7 +50,7 @@ const SplashPage01 = () => {
         value={aboutText}
         qualify="질문자"
         goRight={GoSplash02}
-        {...handlers}
+        // {...handlers}
       ></Splash>
       <Button1 />
       <ImgBox>
