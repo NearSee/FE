@@ -1,6 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 import TopBar from "../../components/TopBar";
 
@@ -114,14 +117,18 @@ const QuestionBox = styled.div`
   background: rgba(255, 141, 93, 0.04);
   box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25) inset;
 
-  color: #000;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-  letter-spacing: -0.05625rem;
+  .speech-text {
+    width: 100%;
+    height: 8rem;
+
+    color: #000;
+    font-family: Pretendard;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: -0.05625rem;
+  }
 
   .status {
     display: flex;
@@ -161,12 +168,10 @@ const ButtonArea = styled.div`
 
     border-radius: 1.25rem;
     border: none;
-    background: linear-gradient(
-        0deg,
-        rgba(89, 89, 89, 0.44) 0%,
-        rgba(89, 89, 89, 0.44) 100%
-      ),
-      #fff;
+    background: ${(props) =>
+      props.active
+        ? "#FF6D2E"
+        : "linear-gradient(0deg, rgba(89, 89, 89, 0.44) 0%, rgba(89, 89, 89, 0.44) 100%), #fff"};
 
     color: #fff;
     text-align: center;
@@ -183,10 +188,59 @@ const ButtonArea = styled.div`
 
 const Q_VoicePage = () => {
   const [iconClicked, setIconClicked] = useState(false);
+  const [speechText, setSpeechText] = useState("");
+  const [timer, setTimer] = useState(0);
+  const [isRecognitionComplete, setIsRecognitionComplete] = useState(false);
+  const { transcript, resetTranscript } = useSpeechRecognition();
 
+  /* 니어씨 클릭 시 음성 인식과 타이머 시작 */
   const handleIconClick = () => {
+    if (!iconClicked) {
+      SpeechRecognition.startListening({ continuous: true, language: "ko-KR" });
+      setSpeechText("");
+      setTimer(0);
+      setIsRecognitionComplete(false);
+      resetTranscript();
+    } else {
+      SpeechRecognition.stopListening();
+    }
     setIconClicked((prevClick) => !prevClick);
   };
+
+  /* 음성인식을 텍스트로 변환 */
+  useEffect(() => {
+    if (transcript !== "") {
+      setSpeechText(transcript);
+    }
+  }, [transcript]);
+
+  /* 타이머 */
+  useEffect(() => {
+    let interval;
+    if (iconClicked) {
+      const startTime = Date.now();
+      interval = setInterval(() => {
+        const currentTime = Date.now();
+        const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+        setTimer(elapsedTime);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [iconClicked]);
+
+  /* 텍스트로 변환되고 3초 후 질문 완료 상태 */
+  useEffect(() => {
+    if (speechText !== "" && !isRecognitionComplete) {
+      const recognitionTimeout = setTimeout(() => {
+        setIsRecognitionComplete(true);
+        SpeechRecognition.stopListening();
+      }, 3000);
+
+      return () => clearTimeout(recognitionTimeout);
+    }
+  }, [speechText, isRecognitionComplete]);
 
   return (
     <Background>
@@ -210,7 +264,7 @@ const Q_VoicePage = () => {
       </Title>
 
       <div className="icon" onClick={handleIconClick}>
-        {iconClicked ? (
+        {iconClicked && !isRecognitionComplete ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="239"
@@ -505,11 +559,19 @@ const Q_VoicePage = () => {
 
       <Description>
         {iconClicked ? (
-          <span>
-            <span className="orange">질문 중</span>입니다.
-            <br />
-            중단하려면 다시 니어씨를 누르세요.
-          </span>
+          isRecognitionComplete ? (
+            <span>
+              인식이 완료되었습니다!
+              <br />
+              아래 <span className="orange">질문하기 버튼</span>을 눌러주세요.
+            </span>
+          ) : (
+            <span>
+              <span className="orange">질문 중</span>입니다.
+              <br />
+              중단하려면 다시 니어씨를 누르세요.
+            </span>
+          )
         ) : (
           <span>
             아이콘을 눌러서
@@ -520,7 +582,7 @@ const Q_VoicePage = () => {
         )}
       </Description>
 
-      {iconClicked ? (
+      {iconClicked && !isRecognitionComplete ? (
         <Timer>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -541,16 +603,25 @@ const Q_VoicePage = () => {
               stroke-linecap="round"
             />
           </svg>
-          00 : 00 : 03
+          {("0" + Math.floor(timer / 3600)).slice(-2)} :{" "}
+          {("0" + Math.floor((timer % 3600) / 60)).slice(-2)} :{" "}
+          {("0" + (timer % 60)).slice(-2)}
         </Timer>
       ) : (
         <Timer> </Timer>
       )}
 
       <QuestionBox>
-        <span className="status">질문 전</span>
+        <span className="status">
+          {iconClicked
+            ? isRecognitionComplete
+              ? "질문 완료"
+              : "질문 중"
+            : "질문 전"}
+        </span>
+        <span className="speech-text">{iconClicked ? speechText : ""}</span>
       </QuestionBox>
-      <ButtonArea>
+      <ButtonArea active={speechText && isRecognitionComplete}>
         <button>질문하기</button>
       </ButtonArea>
     </Background>
