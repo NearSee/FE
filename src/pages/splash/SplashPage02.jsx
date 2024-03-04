@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Splash from "../components/splash/Splash";
+import Splash from "../../components/splash/Splash";
 import { useNavigate } from "react-router-dom";
-import Button2 from "../components/splash/Button2";
+import Button2 from "../../components/splash/Button2";
 
 const Background = styled.div`
   position: relative;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Splash from "../components/splash/Splash";
-import Button1 from "../components/splash/Button1";
+import Splash from "../../components/splash/Splash";
+import Button1 from "../../components/splash/Button1";
 import { useNavigate } from "react-router-dom";
 // import { useSwipeable } from "react-swipeable";
 
