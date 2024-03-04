@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import UserProfile from "../components/mypage/UserProfile";
-import QuestionList from "../components/mypage/QuestionList";
+import UserProfile from "../../components/mypage/UserProfile";
+import QuestionList from "../../components/mypage/QuestionList";
 
 const Background = styled.div`
   position: relative;

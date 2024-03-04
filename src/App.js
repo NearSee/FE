@@ -14,7 +14,7 @@ import Q_MainPage from "./pages/senior/Q_MainPage";
 import Q_VoicePage from "./pages/senior/Q_VoicePage";
 import Q_TextPage from "./pages/senior/Q_TextPage";
 import WaitingPage from "./pages/senior/WaitingPage";
-import Q_MyPage from "./pages/Q_MyPage";
+import Q_MyPage from "./pages/senior/Q_MyPage";
 
 function App() {
   return (
