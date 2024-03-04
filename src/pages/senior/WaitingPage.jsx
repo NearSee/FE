@@ -123,6 +123,44 @@ const SimilarQuestion = styled.div`
 `;
 
 const WaitingPage = () => {
+  const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prevCount) => (prevCount % 3) + 1);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const renderContent = () => {
+    switch (count) {
+      case 1:
+        return (
+          <span>
+            현재 니어씨에 접속해 있는 <br />
+            모두에게 <span className="orange">알림</span>을 보냈어요.
+          </span>
+        );
+      case 2:
+        return (
+          <span>
+            앞으로 어떤 상황이 와도
+            <br />
+            <span className="orange">니어씨</span>가 답을 알려줄게요.
+          </span>
+        );
+      case 3:
+        return (
+          <span>
+            잠시만요. <br />
+            <span className="orange"> 답변</span>이 작성되고 있어요!
+          </span>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <Background>
       <TopBar hideSVG={true} />
@@ -242,12 +280,7 @@ const WaitingPage = () => {
         </svg>
       </IconContainer>
 
-      <Description>
-        <span>
-          현재 니어씨에 접속해 있는 <br />
-          모두에게 <span className="orange">알림</span>을 보냈어요.
-        </span>
-      </Description>
+      <Description>{renderContent()}</Description>
 
       <DotsContainer>
         <svg

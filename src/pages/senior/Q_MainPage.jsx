@@ -66,8 +66,6 @@ const WaytoQuestion = styled.div`
 
   width: 100%;
   height: 7.5rem;
-
-  cursor: pointer;
 `;
 
 const Button = styled.div`
@@ -86,6 +84,8 @@ const Button = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  cursor: pointer;
 `;
 
 const MyQuestionArea = styled.div`
