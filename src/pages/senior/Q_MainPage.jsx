@@ -242,6 +242,7 @@ const Dots = styled.div`
 const Q_MainPage = () => {
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const questionscrollRef = useRef();
+  const navigate = useNavigate();
 
   const handleDotClick = (index) => {
     setActiveDotIndex(index);
@@ -261,6 +262,14 @@ const Q_MainPage = () => {
     const index = Math.round(scrollTop / questionBoxHeight);
 
     setActiveDotIndex(index);
+  };
+
+  const gotoVoice = () => {
+    navigate("/q_voice");
+  };
+
+  const gotoText = () => {
+    navigate("/q_text");
   };
 
   const questionData = [
@@ -313,7 +322,7 @@ const Q_MainPage = () => {
       </Introduce>
 
       <WaytoQuestion>
-        <Button>
+        <Button onClick={gotoVoice}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="17"
@@ -330,7 +339,7 @@ const Q_MainPage = () => {
             <span style={{ fontWeight: "800" }}>음성</span>으로 질문하기
           </span>
         </Button>
-        <Button>
+        <Button onClick={gotoText}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="17"

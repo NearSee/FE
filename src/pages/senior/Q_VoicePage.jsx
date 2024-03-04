@@ -168,10 +168,10 @@ const ButtonArea = styled.div`
 
     border-radius: 1.25rem;
     border: none;
-    background: ${(props) =>
-      props.active
-        ? "#FF6D2E"
-        : "linear-gradient(0deg, rgba(89, 89, 89, 0.44) 0%, rgba(89, 89, 89, 0.44) 100%), #fff"};
+    background: ${({ active }) =>
+      active
+        ? "#ff6d2e"
+        : "linear-gradient(0deg, rgba(89, 89, 89, 0.44) 0%, rgba(89, 89, 89, 0.44) 100%), #FFF;"};
 
     color: #fff;
     text-align: center;
@@ -182,8 +182,7 @@ const ButtonArea = styled.div`
     line-height: normal;
     letter-spacing: -0.07856rem;
 
-    cursor: pointer;
-  }
+    cursor: ${({ active }) => (active ? "pointer" : "default")};
 `;
 
 const Q_VoicePage = () => {
@@ -192,6 +191,7 @@ const Q_VoicePage = () => {
   const [timer, setTimer] = useState(0);
   const [isRecognitionComplete, setIsRecognitionComplete] = useState(false);
   const { transcript, resetTranscript } = useSpeechRecognition();
+  const navigate = useNavigate();
 
   /* 니어씨 클릭 시 음성 인식과 타이머 시작 */
   const handleIconClick = () => {
@@ -241,6 +241,10 @@ const Q_VoicePage = () => {
       return () => clearTimeout(recognitionTimeout);
     }
   }, [speechText, isRecognitionComplete]);
+
+  const gotoAsk = () => {
+    navigate("/wait");
+  };
 
   return (
     <Background>
@@ -622,7 +626,7 @@ const Q_VoicePage = () => {
         <span className="speech-text">{iconClicked ? speechText : ""}</span>
       </QuestionBox>
       <ButtonArea active={speechText && isRecognitionComplete}>
-        <button>질문하기</button>
+        <button onClick={gotoAsk}>질문하기</button>
       </ButtonArea>
     </Background>
   );

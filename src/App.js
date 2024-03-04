@@ -12,6 +12,8 @@ import SplashChoosePage from "./pages/splash/SplashChoosePage";
 
 import Q_MainPage from "./pages/senior/Q_MainPage";
 import Q_VoicePage from "./pages/senior/Q_VoicePage";
+import Q_TextPage from "./pages/senior/Q_TextPage";
+import WaitingPage from "./pages/senior/WaitingPage";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="splash_choose" element={<SplashChoosePage />} />
           <Route path="q_main" element={<Q_MainPage />} />
           <Route path="q_voice" element={<Q_VoicePage />} />
+          <Route path="q_text" element={<Q_TextPage />} />
+          <Route path="wait" element={<WaitingPage />} />
         </Route>
       </Routes>
     </Router>
