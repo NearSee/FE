@@ -9,6 +9,7 @@ import SplashPage01 from "./pages/SplashPage01";
 import SplashPage02 from "./pages/SplashPage02";
 import SplashChoosePage from "./pages/SplashChoosePage";
 import Q_MyPage from "./pages/Q_MyPage";
+import A_MainPage from "./pages/answer/A_MainPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="splash02" element={<SplashPage02 />} />
           <Route path="splash_choose" element={<SplashChoosePage />} />
           <Route path="q_mypage" element={<Q_MyPage />} />
+          <Route path="a_main" element={<A_MainPage />} />
         </Route>
       </Routes>
     </Router>
