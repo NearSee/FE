@@ -3,18 +3,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
 
-import LoginPage from "./pages/LoginPage";
-import CallbackPage from "./pages/CallbackPage";
+import LoginPage from "./pages/login/LoginPage";
+import CallbackPage from "./pages/login/CallbackPage";
 
-import SplashPage01 from "./pages/SplashPage01";
-import SplashPage02 from "./pages/SplashPage02";
-import SplashChoosePage from "./pages/SplashChoosePage";
+import SplashPage01 from "./pages/splash/SplashPage01";
+import SplashPage02 from "./pages/splash/SplashPage02";
+import SplashChoosePage from "./pages/splash/SplashChoosePage";
 
 import Q_MainPage from "./pages/senior/Q_MainPage";
 import Q_VoicePage from "./pages/senior/Q_VoicePage";
 import Q_TextPage from "./pages/senior/Q_TextPage";
 import WaitingPage from "./pages/senior/WaitingPage";
-import Q_MyPage from "./pages/Q_MyPage";
+import Q_MyPage from "./pages/senior/Q_MyPage";
 
 import A_MainPage from "./pages/answer/A_MainPage";
 
