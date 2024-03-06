@@ -31,7 +31,7 @@ const Layout = styled.div`
 const TopBar = ({ hideSVG }) => {
   return (
     <Layout>
-      <img src={`${process.env.PUBLIC_URL}/images/small_logo3.png`} />
+      <img src={`${process.env.PUBLIC_URL}/images/logo_orange.png`} />
       {!hideSVG && (
         <svg
           xmlns="http://www.w3.org/2000/svg"

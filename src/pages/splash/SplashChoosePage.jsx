@@ -1,29 +1,32 @@
-import styled from "styled-components";
-import Modal from "../../components/splash/Modal";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Top from "../../components/splash/Top";
+import styled from "styled-components";
+
+import { useNavigate } from "react-router-dom";
+
+import ChooseTop from "../../components/splash/ChooseTop";
+import Modal from "../../components/splash/Modal";
 
 const Background = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.3rem;
+
   background: #fff;
   overflow: hidden;
 `;
 
-const Div = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-`;
-const Explain01 = styled.div`
+const Guide = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100%;
   height: 3rem;
-
-  margin-top: 5.5rem;
 
   color: #000;
   font-family: Pretendard;
@@ -33,61 +36,75 @@ const Explain01 = styled.div`
   line-height: normal;
   letter-spacing: -0.8px;
 
-  span {
+  .orange {
     color: #ff6d2e;
   }
 `;
-const ChoosContainer = styled.div`
-  padding-left: 3rem;
-  display: flex;
-  height: 11.8rem;
-  gap: 2rem;
 
-  margin-top: 1rem;
+const ChooseContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 16rem;
+  gap: 1.5rem;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
-const Explain02 = styled.div`
-  height: 5rem;
-  margin-top: 6rem;
+const Description = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  text-align: center;
   color: #7e7c7c;
-
   font-family: Pretendard;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.8px;
+
+  .bold {
+    font-weight: 700;
+  }
 `;
+
 const ChooseBtn = styled.button`
-  width: 246px;
-  height: 53px;
+  position: Relative;
+  top: 4rem;
+
+  width: 15.375rem;
+  height: 3.3125rem;
   flex-shrink: 0;
+
   border: none;
   border-radius: 30rem;
 
   color: #fff;
   text-align: center;
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.05rem;
 
-  margin-top: 4.5rem;
   background: ${(props) =>
     props.select ? "#FF6D2E" : "rgba(89, 89, 89, 0.44)"};
+
+  cursor: ${(props) => (props.select ? "pointer" : "default")};
 `;
 
 const SplashChoosePage = () => {
   const [select, setSelect] = useState(0);
   const [value, setValue] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
 
-  const IsOpen = () => {
-    setIsOpen(true);
-  };
+  const [showModal, setShowModal] = useState(false);
 
   const SelectQ = () => {
     setSelect(1);
@@ -98,50 +115,180 @@ const SplashChoosePage = () => {
     setValue("답변자");
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const handleModal = () => {
+    setShowModal(true);
   };
 
   return (
     <Background>
-      <Div>
-        <Top />
-        <Explain01>
-          어떤 것을 <span>선택</span>하시나요?
-        </Explain01>
-        <ChoosContainer>
-          <img
-            onClick={SelectQ}
-            src={
-              value === "답변자"
-                ? "./images/gray_buttonQ.png"
-                : "./images/buttonQ.png"
-            }
-            alt="질문자 선택 버튼"
-          />
-          <img
-            onClick={SelectA}
-            src={
-              value === "질문자"
-                ? "./images/gray_buttonA.png"
-                : "./images/buttonA.png"
-            }
-            alt="답변자 선택 버튼"
-          />
-        </ChoosContainer>
+      <ChooseTop />
 
-        <Explain02>
+      <Guide>
+        <span>
+          어떤 것을 <span className="orange">선택</span>하시나요?
+        </span>
+      </Guide>
+
+      <ChooseContainer>
+        <div onClick={SelectQ}>
+          {value === "답변자" ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="121"
+              height="168"
+              viewBox="0 0 121 168"
+              fill="none"
+            >
+              <path
+                d="M1.00012 25.2632C1.00012 11.3107 12.3108 0 26.2633 0H95.737C109.689 0 121 11.3107 121 25.2632V142.737C121 156.689 109.689 168 95.737 168H26.2633C12.3108 168 1.00012 156.689 1.00012 142.737V25.2632Z"
+                fill="#DFDFDF"
+              />
+              <path
+                d="M31.1469 37C35.1919 64.2576 17.5745 86.6 0.909668 89.0731L0.972648 41.4779L31.1469 37Z"
+                fill="#BABABA"
+                fill-opacity="0.5"
+              />
+              <path
+                d="M51.7247 118.737L85.83 138.947L100.988 168H51.7247V118.737Z"
+                fill="#BABABA"
+              />
+              <path
+                d="M58.84 133.867V143.086H55.715V133.867H58.84ZM43.5861 140.918C46.3204 140.234 47.4728 138.633 47.756 137.051H44.4064V134.59H54.2892V137.051H51.0665C51.3497 138.506 52.463 139.971 55.129 140.625L53.6642 143.027C51.6232 142.51 50.2755 141.436 49.465 140.078C48.6447 141.611 47.1993 142.832 45.0118 143.398L43.5861 140.918ZM46.5157 146.035V143.691H58.8595V148.848H49.6212V149.492H59.2501V151.855H46.5548V146.641H55.7345V146.035H46.5157Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M77.3947 142.598V145.078H70.9689V147.812H67.8634V145.078H60.9103V142.598H77.3947ZM62.7072 151.68V146.367H65.8322V149.18H75.5978V151.68H62.7072ZM62.9025 141.504V134.609H75.3243V141.504H62.9025ZM65.9493 139.102H72.2384V137.031H65.9493V139.102Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M53.4142 90.1719C53.3751 80.9922 55.6407 78.1406 59.8204 75.4062C63.297 73.1406 65.9532 71.1875 65.9923 67.9844C65.9532 65.0938 63.6486 63.1406 60.7579 63.1406C57.672 63.1406 55.0548 65.4062 54.9767 68.7656H41.2267C41.3829 56.7734 50.2111 51.6562 60.8361 51.6562C72.5548 51.6562 81.1486 56.8906 81.1486 67.2031C81.1486 73.8828 77.5157 77.8281 72.1642 80.9531C68.1407 83.375 66.0704 85.6016 66.0704 90.1719V91.4219H53.4142V90.1719ZM52.3204 102.281C52.2814 98.1406 55.7189 94.7812 59.8986 94.7812C63.8829 94.7812 67.4376 98.1406 67.4767 102.281C67.4376 106.5 63.8829 109.859 59.8986 109.859C55.7189 109.859 52.2814 106.5 52.3204 102.281Z"
+                fill="white"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="121"
+              height="168"
+              viewBox="0 0 121 168"
+              fill="none"
+            >
+              <path
+                d="M1.00012 25.2632C1.00012 11.3107 12.3108 0 26.2633 0H95.737C109.689 0 121 11.3107 121 25.2632V142.737C121 156.689 109.689 168 95.737 168H26.2633C12.3108 168 1.00012 156.689 1.00012 142.737V25.2632Z"
+                fill="#FF8B59"
+              />
+              <path
+                d="M31.1469 37C35.1919 64.2576 17.5745 86.6 0.909668 89.0731L0.972648 41.4779L31.1469 37Z"
+                fill="#FFC2A8"
+                fill-opacity="0.5"
+              />
+              <path
+                d="M51.7247 118.737L85.83 138.947L100.988 168H51.7247V118.737Z"
+                fill="#FFC2A8"
+              />
+              <path
+                d="M58.84 133.867V143.086H55.715V133.867H58.84ZM43.5861 140.918C46.3204 140.234 47.4728 138.633 47.756 137.051H44.4064V134.59H54.2892V137.051H51.0665C51.3497 138.506 52.463 139.971 55.129 140.625L53.6642 143.027C51.6232 142.51 50.2755 141.436 49.465 140.078C48.6447 141.611 47.1993 142.832 45.0118 143.398L43.5861 140.918ZM46.5157 146.035V143.691H58.8595V148.848H49.6212V149.492H59.2501V151.855H46.5548V146.641H55.7345V146.035H46.5157Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M77.3947 142.598V145.078H70.9689V147.812H67.8634V145.078H60.9103V142.598H77.3947ZM62.7072 151.68V146.367H65.8322V149.18H75.5978V151.68H62.7072ZM62.9025 141.504V134.609H75.3243V141.504H62.9025ZM65.9493 139.102H72.2384V137.031H65.9493V139.102Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M53.4142 90.1719C53.3751 80.9922 55.6407 78.1406 59.8204 75.4062C63.297 73.1406 65.9532 71.1875 65.9923 67.9844C65.9532 65.0938 63.6486 63.1406 60.7579 63.1406C57.672 63.1406 55.0548 65.4062 54.9767 68.7656H41.2267C41.3829 56.7734 50.2111 51.6562 60.8361 51.6562C72.5548 51.6562 81.1486 56.8906 81.1486 67.2031C81.1486 73.8828 77.5157 77.8281 72.1642 80.9531C68.1407 83.375 66.0704 85.6016 66.0704 90.1719V91.4219H53.4142V90.1719ZM52.3204 102.281C52.2814 98.1406 55.7189 94.7812 59.8986 94.7812C63.8829 94.7812 67.4376 98.1406 67.4767 102.281C67.4376 106.5 63.8829 109.859 59.8986 109.859C55.7189 109.859 52.2814 106.5 52.3204 102.281Z"
+                fill="white"
+              />
+            </svg>
+          )}
+        </div>
+
+        <div onClick={SelectA}>
+          {value === "질문자" ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="120"
+              height="168"
+              viewBox="0 0 120 168"
+              fill="none"
+            >
+              <path
+                d="M0 142.737C0 156.689 11.3107 168 25.2632 168H94.7368C108.689 168 120 156.689 120 142.737V25.2632C120 11.3107 108.689 0 94.7368 0H25.2632C11.3107 0 0 11.3107 0 25.2632V142.737Z"
+                fill="#DFDFDF"
+              />
+              <path
+                d="M48.4905 137.684C55.0463 110.919 26.7933 83.9075 0.0284276 77.3517L0.0284839 125.814L48.4905 137.684Z"
+                fill="#BABABA"
+              />
+              <path d="M51 37L84.9231 21.8205L100 0H51V37Z" fill="#BABABA" />
+              <path
+                d="M57.0781 133.867V137.578H59.3242V140.117H57.0781V143.574H53.9336V133.867H57.0781ZM43.2305 143.281V134.902H51.3164V137.383H46.3555V140.771C49.3828 140.752 51.0137 140.654 52.7812 140.254L53.0938 142.734C50.9941 143.193 48.9531 143.271 44.8125 143.281H43.2305ZM44.9492 151.758V144.375H48.0742V145.684H53.9336V144.375H57.0781V151.758H44.9492ZM48.0742 149.297H53.9336V148.125H48.0742V149.297Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M75.2812 133.906V147.188H72.1562V143.066H69.4414V144.492H60.5938V135.078H63.7383V137.559H66.3555V135.078H69.4414V136.719H72.1562V133.906H75.2812ZM63.0352 151.68V145.859H66.2188V149.18H75.6523V151.68H63.0352ZM63.7383 142.07H66.3555V139.922H63.7383V142.07ZM69.4414 140.586H72.1562V139.219H69.4414V140.586Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M68.5 52.4375L67.1719 91.4219H54.9062L53.5 52.4375H68.5ZM53.4219 102.281C53.3828 98.1406 56.8203 94.7812 61 94.7812C64.9844 94.7812 68.5391 98.1406 68.5781 102.281C68.5391 106.5 64.9844 109.859 61 109.859C56.8203 109.859 53.3828 106.5 53.4219 102.281Z"
+                fill="white"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="120"
+              height="168"
+              viewBox="0 0 120 168"
+              fill="none"
+            >
+              <path
+                d="M0 142.737C0 156.689 11.3107 168 25.2632 168H94.7368C108.689 168 120 156.689 120 142.737V25.2632C120 11.3107 108.689 1.19209e-07 94.7368 1.19209e-07H25.2632C11.3107 1.19209e-07 0 11.3107 0 25.2632V142.737Z"
+                fill="#FFD540"
+              />
+              <path
+                d="M48.4905 137.684C55.0463 110.919 26.7933 83.9075 0.0284275 77.3517L0.0284839 125.814L48.4905 137.684Z"
+                fill="#FFE1D5"
+              />
+              <path d="M51 37L84.9231 21.8205L100 0H51V37Z" fill="#FFE1D4" />
+              <path
+                d="M57.0781 133.867V137.578H59.3242V140.117H57.0781V143.574H53.9336V133.867H57.0781ZM51.3164 134.902V137.383H46.3555V140.762C49.3828 140.752 51.0137 140.645 52.7812 140.254L53.0938 142.734C51.0039 143.184 48.9531 143.262 44.8125 143.281H43.2305V134.902H51.3164ZM48.0742 144.375V145.684H53.9336V144.375H57.0781V151.758H44.9492V144.375H48.0742ZM48.0742 149.297H53.9336V148.125H48.0742V149.297Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M75.2812 133.906V147.188H72.1562V143.066H69.4414V144.492H60.5938V135.078H63.7383V137.559H66.3555V135.078H69.4414V136.719H72.1562V133.906H75.2812ZM75.6523 149.18V151.68H63.0352V145.859H66.2188V149.18H75.6523ZM63.7383 142.07H66.3555V139.922H63.7383V142.07ZM69.4414 140.586H72.1562V139.219H69.4414V140.586Z"
+                fill="#762B0A"
+              />
+              <path
+                d="M68.5 52.4375L67.1719 91.4219H54.9062L53.5 52.4375H68.5ZM61 109.859C56.7812 109.859 53.3438 106.5 53.4219 102.281C53.3438 98.1406 56.7812 94.7812 61 94.7812C64.9844 94.7812 68.5781 98.1406 68.5781 102.281C68.5781 106.5 64.9844 109.859 61 109.859Z"
+                fill="white"
+              />
+            </svg>
+          )}
+        </div>
+      </ChooseContainer>
+
+      <Description>
+        <span>
           하나를 선택하시면
           <br />
-          이후에 <b>바꿀 수 없습니다.</b>
+          이후에 <span className="bold">바꿀 수 없습니다.</span>
           <br />
           신중히 선택해주세요.
-        </Explain02>
-        <ChooseBtn onClick={IsOpen} select={select}>
-          선택 완료
-        </ChooseBtn>
-      </Div>
-      {isOpen && <Modal isOpen={isOpen} onClose={closeModal} value={value} />}
+        </span>
+      </Description>
+
+      <ChooseBtn onClick={handleModal} select={select}>
+        시작하기
+      </ChooseBtn>
+
+      {showModal && (
+        <Modal
+          onCloseModal={() => {
+            setShowModal(false);
+          }}
+          value={value}
+        />
+      )}
     </Background>
   );
 };

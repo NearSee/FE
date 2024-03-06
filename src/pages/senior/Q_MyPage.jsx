@@ -25,7 +25,6 @@ const TopBar = styled.div`
 
   display: flex;
   align-items: center;
-
   justify-content: space-between;
 
   background-color: #ff8d5d;
@@ -121,7 +120,7 @@ const Q_MyPage = () => {
   return (
     <Background>
       <TopBar>
-        <img src={`${process.env.PUBLIC_URL}/images/small_logo4.png`} />
+        <img src={`${process.env.PUBLIC_URL}/images/logo_white.png`} />
 
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -136,9 +135,9 @@ const Q_MyPage = () => {
           />
         </svg>
       </TopBar>
+
       <RoundBox>
         <UserProfile name={name} value={value} />
-
         <CountArea>
           <div className="count-box">
             <div className="question-mark">
