@@ -34,8 +34,8 @@ function App() {
           <Route path="q_voice" element={<Q_VoicePage />} />
           <Route path="q_text" element={<Q_TextPage />} />
           <Route path="wait" element={<WaitingPage />} />
-
           <Route path="q_mypage" element={<Q_MyPage />} />
+
           <Route path="a_main" element={<A_MainPage />} />
         </Route>
       </Routes>
