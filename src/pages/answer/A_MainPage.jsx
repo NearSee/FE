@@ -5,6 +5,7 @@ import TimeBox from "../../components/answer/main/MainTime";
 import Question from "../../components/answer/main/MainQuestion";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   position: relative;
@@ -57,7 +58,18 @@ const A_MainPage = () => {
   const [month_time, setMonthTime] = useState(0);
   const [total_answer, setTotalAnswer] = useState(0);
   const [total_time, setTotalTime] = useState(0);
-  const [method, setMethod] = useState(true);
+
+  const navigate = useNavigate();
+  const GoMorePage = () => {
+    navigate("/a_more");
+  };
+
+  const questionData = [
+    { id: 0, method: true, content: "내가 어저구 하고 싶은데 어ㅈ떻라지?" },
+    { id: 1, method: false, content: "올리브영 많이 사고 싶은데 어떻하지?" },
+    { id: 2, method: true, content: "내가 게으른걸 어떻하지?" },
+    { id: 3, method: true, content: "과외가기 싫은데 어떻하지?" },
+  ];
 
   return (
     <Background>
@@ -71,29 +83,11 @@ const A_MainPage = () => {
         />
         <div id="waiting-text">🔥 답변을 기다리는 질문</div>
         <QuestionContainer>
-          <Question
-            id={0}
-            method={method}
-            content={
-              "입금하고 싶은데 어떻게 해야 하는건지 모르겠어. 모바일 뱅킹?"
-            }
-          />
-          <Question
-            id={1}
-            method={method}
-            content={
-              "입금하고 싶은데 어떻게 해야 하는건지 모르겠어. 모바일 뱅킹?"
-            }
-          />
-          <Question
-            id={2}
-            method={method}
-            content={
-              "입금하고 싶은데 어떻게 해야 하는건지 모르겠어. 모바일 뱅킹?"
-            }
-          />
+          {questionData.slice(0, 3).map((question) => (
+            <Question question={question} />
+          ))}
         </QuestionContainer>
-        <Button>더보기</Button>
+        <Button onClick={GoMorePage}>더보기</Button>
       </Wrap>
     </Background>
   );

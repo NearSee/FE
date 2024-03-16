@@ -34,15 +34,15 @@ const Content = styled.div`
   letter-spacing: -0.78px;
 `;
 
-const MainQuestion = ({ id, content, method }) => {
+const MainQuestion = ({ question }) => {
   return (
-    <Question id={id}>
-      {method ? (
+    <Question id={question.id}>
+      {question.method ? (
         <img src="../images/speak.png" alt="음성인식" />
       ) : (
         <img src="../images/text.png" alt="타이핑" />
       )}
-      <Content>{content}</Content>
+      <Content>{question.content}</Content>
     </Question>
   );
 };

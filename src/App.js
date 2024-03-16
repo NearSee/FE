@@ -16,6 +16,7 @@ import WaitingPage from "./pages/senior/WaitingPage";
 import Q_MyPage from "./pages/senior/Q_MyPage";
 
 import A_MainPage from "./pages/answer/A_MainPage";
+import A_MorePage from "./pages/answer/A_MorePage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="q_mypage" element={<Q_MyPage />} />
 
           <Route path="a_main" element={<A_MainPage />} />
+          <Route path="a_more" element={<A_MorePage />} />
         </Route>
       </Routes>
     </Router>
