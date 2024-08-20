@@ -48,6 +48,7 @@ const RoundBox = styled.div`
 
     overflow-y: hidden;
     overflow-x: scroll;
+    scroll-snap-type: x mandatory;
   }
 
   .description {
@@ -58,6 +59,8 @@ const RoundBox = styled.div`
 
     width: 100%;
     flex-shrink: 0;
+
+    scroll-snap-align: center;
   }
 `;
 
