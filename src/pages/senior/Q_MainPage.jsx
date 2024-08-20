@@ -92,7 +92,7 @@ const MyQuestionArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: 2.5rem;
   width: 100%;
   height: 21.8rem;
 
@@ -117,6 +117,8 @@ const MyQuestionArea = styled.div`
     height: 21rem;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    scroll-snap-type: y mandatory;
   }
 `;
 
@@ -130,6 +132,8 @@ const QuestionBox = styled.div`
 
   border-radius: 1.15344rem;
   background: #ff8d5d;
+
+  scroll-snap-align: center;
 
   .question {
     margin: 1rem 1rem;
