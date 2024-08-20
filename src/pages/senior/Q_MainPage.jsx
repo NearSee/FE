@@ -137,7 +137,7 @@ const QuestionBox = styled.div`
 
   .question {
     margin: 1rem 1rem;
-    height: 7rem;
+    height: 6.8rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
