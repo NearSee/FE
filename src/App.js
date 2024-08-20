@@ -14,6 +14,7 @@ import Q_VoicePage from "./pages/senior/Q_VoicePage";
 import Q_TextPage from "./pages/senior/Q_TextPage";
 import WaitingPage from "./pages/senior/WaitingPage";
 import Q_MyPage from "./pages/senior/Q_MyPage";
+import Q_ReceivedPage from "./pages/senior/Q_ReceivedPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="q_voice" element={<Q_VoicePage />} />
           <Route path="q_text" element={<Q_TextPage />} />
           <Route path="wait" element={<WaitingPage />} />
+          <Route path="q_received" element={<Q_ReceivedPage />} />
 
           <Route path="q_mypage" element={<Q_MyPage />} />
         </Route>
