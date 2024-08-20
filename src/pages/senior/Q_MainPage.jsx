@@ -240,7 +240,7 @@ const Dots = styled.div`
   border-radius: 0.1875rem;
   background: ${({ active }) => (active ? "#ff6d2e" : "#D9D9D9")};
 
-  transition: all 0.2s ease-in-out;
+  transition: all 0.7s ease-in-out;
 `;
 
 const Q_MainPage = () => {
