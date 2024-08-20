@@ -1,10 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
-
 import ChooseTop from "../../components/splash/ChooseTop";
-import Modal from "../../components/splash/Modal";
+import Modal from "../../components/splash/ChooseModal";
 
 const Background = styled.div`
   position: relative;
