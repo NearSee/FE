@@ -1,7 +1,7 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import withModalBackground from "../../components/withModalBackground";
+import withModalBackground from "../withModalBackground";
 
 const ModalOverlay = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ const Icon = styled.div`
   padding-top: 2rem;
 `;
 
-const Confirm = styled.div`
+const Description = styled.div`
   width: 100%;
 
   text-align: center;
@@ -57,9 +57,7 @@ const Button = styled.div`
   height: 3.64875rem;
   flex-shrink: 0;
 
-  border-radius: 0rem 0rem 0rem 1.25rem;
   border-top: 1.5px solid rgba(128, 128, 128, 0.23);
-  border-right: 2px solid rgba(128, 128, 128, 0.23);
   background: #fff;
 
   color: #363636;
@@ -124,15 +122,23 @@ const Modal = ({ onCloseModal, value }) => {
         </svg>
       </Icon>
 
-      <Confirm>
+      <Description>
         <span>
           <span className="orange">{value}</span>로<br />
           확정하시겠습니까?
         </span>
-      </Confirm>
+      </Description>
 
       <ButtonContainer>
-        <Button onClick={gotoMain}>네</Button>
+        <Button
+          onClick={gotoMain}
+          style={{
+            borderRadius: "0rem 0rem 0rem 1.25rem",
+            borderRight: "2px solid rgba(128, 128, 128, 0.23)",
+          }}
+        >
+          네
+        </Button>
         <Button
           onClick={onCloseModal}
           style={{ borderRadius: "0rem 0rem 1.25rem 0rem" }}
