@@ -96,7 +96,6 @@ const Total = styled.span`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  letter-spacing: -0.9px;
 `;
 const Time = styled.span`
   margin-right: 2rem;
