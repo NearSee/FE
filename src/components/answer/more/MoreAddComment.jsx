@@ -35,6 +35,7 @@ const WhiteBox = styled.div`
 
 const DropDownBox = styled.div`
   position: absolute;
+  z-index: 1;
   right: 1.5rem;
   width: 4.4rem;
   height: 6rem;
